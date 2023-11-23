@@ -1,4 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-custom {
+  background-color: rgba(32, 91, 241, 0.1);
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    to bottom right,
+    rgba(24, 161, 204, 1),
+    rgba(146, 209, 255, 1)
+  );
+}
