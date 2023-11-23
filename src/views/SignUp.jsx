@@ -8,6 +8,7 @@ import UserDetails from "../components/UserDetails";
 import { AnimatePresence } from "framer-motion";
 import MedicalHistory from "../components/MedicalHistory";
 import { motion } from "framer-motion";
+import AlreadyHasAccount from "../components/AlreadyHasAccount";
 export const MemoizedFormInput = memo(FormInput);
 
 const variant = {
@@ -67,8 +68,11 @@ const SignUp = () => {
     validationSchema: Yup.object({
       name: Yup.string().required("Please enter a name"),
       email: Yup.string()
-      .matches(emailRegex, { excludeEmptyString: true, message: "Please enter a valid email" })
-      .required("Please enter a valid email address"),
+        .matches(emailRegex, {
+          excludeEmptyString: true,
+          message: "Please enter a valid email",
+        })
+        .required("Please enter a valid email address"),
       password: Yup.string()
         .min(8, "Must be 8 characters or more")
         .required("Please enter a valid password")
@@ -77,9 +81,9 @@ const SignUp = () => {
           message: "Please enter a valid password",
         }),
     }),
-    onSubmit: async(values) => {
+    onSubmit: async (values) => {
       if (formIndex === 0) {
-        setFormIndex(1)
+        setFormIndex(1);
       } else {
         console.log("sending data to server", values);
       }
@@ -88,13 +92,13 @@ const SignUp = () => {
 
   function changeIndexHandler(index) {
     if (index === formIndex) {
-      return
+      return;
     }
     if (index < formIndex) {
-      setFormIndex(0)
-      return
+      setFormIndex(0);
+      return;
     }
-    formik.handleSubmit() // cause a validation check
+    formik.handleSubmit(); // cause a validation check
     if (formik.isValid && formik.dirty) {
       const newFormIndex = formIndex === 0 ? 1 : 0;
       setFormIndex(newFormIndex);
@@ -102,8 +106,8 @@ const SignUp = () => {
   }
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden">
-      <section className="flex flex-col absolute overflow-hidden inset-0 top-5 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
+    <main className="relative w-screen h-screen">
+      <section className="flex flex-col absolute overflow-hidden inset-0 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
         <AnimatePresence mode="popLayout">
           {formIndex === 0 ? (
             <motion.div
@@ -137,11 +141,16 @@ const SignUp = () => {
           <button
             onClick={() => changeIndexHandler(1)}
             className={`${
-              formIndex === 1 ? "scale-150 bg-[#bfbfbf]" : "bg-[#e2e8f0] scale-100"
+              formIndex === 1
+                ? "scale-150 bg-[#bfbfbf]"
+                : "bg-[#e2e8f0] scale-100"
             } w-4 h-4 cursor-pointer duration-300 transition-transform bg-[#e2e8f0] rounded-full`}
           ></button>
         </div>
       </section>
+      <div className="absolute right-5 top-5 hidden lg:flex">
+        <AlreadyHasAccount />
+      </div>
     </main>
   );
 };
