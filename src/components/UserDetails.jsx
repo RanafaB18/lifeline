@@ -86,7 +86,7 @@ const UserDetails = ({ formik }) => {
         <div className="lg:hidden">
           <AlreadyHasAccount />
         </div>
-        <button className="bg-gradient-to-br from-[#28a7d3] to-[#d5e1e6] via-[#28a7d3] text-white py-3 rounded-lg">
+        <button className="bg-[#28a7d3] text-white py-3 rounded-lg">
           Continue
         </button>
       </div>

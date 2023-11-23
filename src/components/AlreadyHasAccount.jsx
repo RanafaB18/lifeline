@@ -6,7 +6,7 @@ const AlreadyHasAccount = () => {
 
     Already have an account?
     </p>
-    <button className="lg:bg-gradient-to-br from-[#28a7d3] to-[#d5e1e6] via-[#28a7d3] text-[#28a7d3] lg:text-white py-1 px-3 rounded-lg">
+    <button className="lg:bg-[#28a7d3] text-[#28a7d3] lg:text-white py-1 px-3 rounded-lg">
       Sign in
     </button>
   </article>

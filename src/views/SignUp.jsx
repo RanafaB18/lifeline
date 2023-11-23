@@ -107,7 +107,7 @@ const SignUp = () => {
 
   return (
     <main className="relative w-screen h-screen">
-      <section className="flex flex-col absolute overflow-hidden inset-0 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
+      <section className="flex flex-col absolute overflow-hidden inset-0 top-5 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
         <AnimatePresence mode="popLayout">
           {formIndex === 0 ? (
             <motion.div
