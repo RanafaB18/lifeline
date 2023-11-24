@@ -3,12 +3,13 @@ import { useState } from "react";
 import Eye from "./Eye";
 import { MemoizedFormInput } from "../views/SignUp";
 import FormSelect from "./FormSelect";
-import AlreadyHasAccount from "./AlreadyHasAccount";
+import AccountQuestion from "./AccountQuestion";
+import ContinueButton from "./ContinueButton";
 
 const options = [
-  { value: "english", label: "English" },
-  { value: "spanish", label: "Spanish" },
-  { value: "french", label: "French" },
+  { value: "en", label: "English" },
+  { value: "es", label: "Spanish" },
+  { value: "fr", label: "French" },
 ];
 
 const UserDetails = ({ formik }) => {
@@ -84,11 +85,13 @@ const UserDetails = ({ formik }) => {
           </button>
         </div>
         <div className="lg:hidden">
-          <AlreadyHasAccount />
+          <AccountQuestion
+            question={"Already have an account?"}
+            buttonText={"Sign in"}
+            to={"/signin"}
+          />
         </div>
-        <button className="bg-[#28a7d3] text-white py-3 rounded-lg">
-          Continue
-        </button>
+        <ContinueButton />
       </div>
     </form>
   );
