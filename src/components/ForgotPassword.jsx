@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 
-const Resetpassword = () => {
+const Forgotpassword = () => {
   const [email, setEmail] = useState();
   return (
     <div className="w-96 bg-white shadow-lg p-4 cursor-pointer rounded-lg">
@@ -34,4 +34,4 @@ const Resetpassword = () => {
   );
 }
 
-export default Resetpassword
+export default Forgotpassword

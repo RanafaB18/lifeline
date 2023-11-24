@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import Resetpassword from "../components/Resetpassword";
+import Forgotpassword from "../components/ForgotPassword";
 
-const PasswordReset = () => {
+const PasswordForgot = () => {
   return (
     <div className="h-screen p-10 ">
       <div className="flex items-center justify-end">
@@ -11,10 +11,10 @@ const PasswordReset = () => {
         </button>
       </div>
       <div className="m-auto  h-full flex justify-center items-center ">
-        <Resetpassword />
+        <Forgotpassword />
       </div>
     </div>
   );
 }
 
-export default PasswordReset
+export default PasswordForgot
