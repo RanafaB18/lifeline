@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { MemoizedFormInput } from "../views/SignUp";
+import ContinueButton from "./ContinueButton";
 
 const MedicalHistory = ({ formik }) => {
   return (
@@ -94,9 +95,7 @@ const MedicalHistory = ({ formik }) => {
         </div>
         <div className="flex flex-col">
 
-        <button className="bg-gradient-to-br from-[#28a7d3] to-[#d5e1e6] via-[#28a7d3] text-white py-3 rounded-lg">
-          Continue
-        </button>
+        <ContinueButton />
         <button className="text-[#28a7d3] py-3 rounded-lg">
           Skip for now
         </button>
