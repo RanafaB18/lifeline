@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-
-
-const Sidebar = () => {
-  return (
-    <div className="h-screen border-r-2 ">
-        Sidebar
-    </div>
-  )
-}
-
-export default Sidebar
-=======
 import LifelineIcon from "../assets/sidebar-lifeline.png";
 import Clock from "../assets/Clock-d.png";
 import Bulb from "../assets/bulb.png";
@@ -100,4 +87,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
->>>>>>> 813fea33e8231d9304afc96232e5a3c9fe65c800
