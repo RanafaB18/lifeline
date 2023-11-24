@@ -8,7 +8,9 @@ import UserDetails from "../components/UserDetails";
 import { AnimatePresence } from "framer-motion";
 import MedicalHistory from "../components/MedicalHistory";
 import { motion } from "framer-motion";
-import AlreadyHasAccount from "../components/AlreadyHasAccount";
+import AccountQuestion from "../components/AccountQuestion";
+import { signUpHandler } from "../service/crud";
+import { useLoading } from "../hooks/useLoading";
 export const MemoizedFormInput = memo(FormInput);
 
 const variant = {
@@ -49,10 +51,11 @@ const variant = {
 
 const SignUp = () => {
   const [formIndex, setFormIndex] = useState(0);
+  const { setIsLoading } = useLoading()
   const initialValues = {
     name: "",
     email: "",
-    language: "english",
+    language: "en",
     password: "",
     medicalCondition: "",
     allergies: "",
@@ -85,7 +88,24 @@ const SignUp = () => {
       if (formIndex === 0) {
         setFormIndex(1);
       } else {
-        console.log("sending data to server", values);
+        setIsLoading(true)
+        const { name, email, password, language, allergies } = values;
+        const formData = {
+          full_name: name,
+          email,
+          password,
+          preferred_language: language,
+          allergy_description: allergies,
+        };
+        console.log("sending data to server", formData);
+        try {
+          const response = await signUpHandler(formData);
+          console.log(response);
+        } catch (err) {
+          setFormIndex(0);
+          formik.setFieldError("email", "Email already exists");
+        }
+        setIsLoading(false)
       }
     },
   });
@@ -104,54 +124,57 @@ const SignUp = () => {
       setFormIndex(newFormIndex);
     }
   }
-
   return (
-    <main className="relative w-screen h-screen">
-      <section className="flex flex-col absolute overflow-hidden inset-0 top-5 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
-        <AnimatePresence mode="popLayout">
-          {formIndex === 0 ? (
-            <motion.div
-              variants={variant}
-              initial="userDetailsHidden"
-              animate="visible"
-              exit={"userDetailsExit"}
-              key={"userDetails"}
-            >
-              <UserDetails formik={formik} />
-            </motion.div>
-          ) : (
-            <motion.div
-              variants={variant}
-              initial="medicalHistoryHidden"
-              animate="visible"
-              exit={"medicalHistoryExit"}
-              key={"medicalHistory"}
-            >
-              <MedicalHistory formik={formik} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className="flex gap-3 mt-4 self-center items-center">
-          <button
-            onClick={() => changeIndexHandler(0)}
-            className={`${
-              formIndex === 0 ? "scale-150 bg-[#bfbfbf]" : "bg-[#e2e8f0]"
-            } w-4 h-4 cursor-pointer duration-300 transition-transform rounded-full`}
-          ></button>
-          <button
-            onClick={() => changeIndexHandler(1)}
-            className={`${
-              formIndex === 1
-                ? "scale-150 bg-[#bfbfbf]"
-                : "bg-[#e2e8f0] scale-100"
-            } w-4 h-4 cursor-pointer duration-300 transition-transform bg-[#e2e8f0] rounded-full`}
-          ></button>
+      <main className="relative w-screen h-screen">
+        <section className="flex flex-col absolute overflow-hidden inset-0 top-5 mx-auto w-[600px] h-fit rounded-2xl border border-gray-50 shadow-xl px-16 py-8 font-open">
+          <AnimatePresence mode="popLayout">
+            {formIndex === 0 ? (
+              <motion.div
+                variants={variant}
+                initial="userDetailsHidden"
+                animate="visible"
+                exit={"userDetailsExit"}
+                key={"userDetails"}
+              >
+                <UserDetails formik={formik} />
+              </motion.div>
+            ) : (
+              <motion.div
+                variants={variant}
+                initial="medicalHistoryHidden"
+                animate="visible"
+                exit={"medicalHistoryExit"}
+                key={"medicalHistory"}
+              >
+                <MedicalHistory formik={formik} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className="flex gap-3 mt-4 self-center items-center">
+            <button
+              onClick={() => changeIndexHandler(0)}
+              className={`${
+                formIndex === 0 ? "scale-150 bg-[#bfbfbf]" : "bg-[#e2e8f0]"
+              } w-4 h-4 cursor-pointer duration-300 transition-transform rounded-full`}
+            ></button>
+            <button
+              onClick={() => changeIndexHandler(1)}
+              className={`${
+                formIndex === 1
+                  ? "scale-150 bg-[#bfbfbf]"
+                  : "bg-[#e2e8f0] scale-100"
+              } w-4 h-4 cursor-pointer duration-300 transition-transform bg-[#e2e8f0] rounded-full`}
+            ></button>
+          </div>
+        </section>
+        <div className="absolute right-5 top-5 hidden lg:flex">
+          <AccountQuestion
+            question={"Already have an account?"}
+            buttonText={"Sign in"}
+            to={"/signin"}
+          />
         </div>
-      </section>
-      <div className="absolute right-5 top-5 hidden lg:flex">
-        <AlreadyHasAccount />
-      </div>
-    </main>
+      </main>
   );
 };
 
