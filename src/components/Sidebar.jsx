@@ -9,7 +9,10 @@ const history = [
   { text: "I have a headache and...." },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ showMobileNav }) => {
+  const handleClick = () => {
+    showMobileNav();
+  };
   return (
     <aside className=" w-full md:w-[290px] flex flex-row md:flex-col  md:border md:border-r-1 shadow-md">
       {/* LifeLIne */}
@@ -79,7 +82,7 @@ const Sidebar = () => {
       </div>
 
       {/* icon */}
-      <div className="md:hidden mt-4 mr-4">
+      <div className="md:hidden mt-4 mr-4 cursor-pointer" onClick={handleClick}>
         <ion-icon name="menu-outline" size="large"></ion-icon>
       </div>
     </aside>
